@@ -1,5 +1,18 @@
-.featured_question_q {
-	font-size: 600%;
+#featured_question {
+	position: relative;
+	top: 0.5rem;
+	font-size: 270%;
+}
+
+#featured_question_note {
+	height: 0;
+}
+
+#featured_question_note span {
+	color: #757575;
+	position: relative;
+    top: -2.5rem;
+    right: -10rem;
 }
 
 .home_navbar {
@@ -10,6 +23,7 @@
 	background-color: #0288D1;
 	color: #fff;
 	border-radius: 0;
+	margin-bottom: 1rem;
 }
 
 .home_jumbotron_text {
