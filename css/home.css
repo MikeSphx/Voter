@@ -1,9 +1,21 @@
+.featured_question_q {
+	font-size: 600%;
+}
+
 .home_navbar {
 	background-color: #fff;
 }
 
 .home_jumbotron {
-	background-color: #00bcd4;
+	background-color: #0288D1;
 	color: #fff;
 	border-radius: 0;
+}
+
+.home_jumbotron_text {
+	color: #B3E5FC;
+}
+
+.home_jumbotron_title {
+	font-size: 350%;
 }
