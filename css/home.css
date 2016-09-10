@@ -1,6 +1,13 @@
+#answer_wrapper {
+	width: 72.6%;
+    margin: 0 auto;
+    margin-top: 3rem;
+    margin-bottom: 4rem;
+}
+
 #featured_question {
 	position: relative;
-	top: 0.5rem;
+	top: 0.7rem;
 	font-size: 270%;
 }
 
@@ -13,6 +20,14 @@
 	position: relative;
     top: -2.5rem;
     right: -10rem;
+}
+
+.answer_btn {
+    width: 48%;
+    margin-left: 1%;
+    color: #fff;
+    background-color: #03A9F4;
+    padding: 4rem 0rem 4rem 0rem;
 }
 
 .home_navbar {
