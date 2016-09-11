@@ -22,6 +22,10 @@
     right: -10rem;
 }
 
+#see_answer {
+	float: right;
+}
+
 .answer_btn {
 	font-size: 180%;
     width: 48%;
