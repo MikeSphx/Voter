@@ -22,6 +22,12 @@
     right: -10rem;
 }
 
+
+#results_subtitle {
+	color: #757575;
+	font-size: 1.25rem;
+}
+
 #see_results {
 	float: right;
 }
@@ -58,4 +64,18 @@
 
 .home_jumbotron_title {
 	font-size: 350%;
+}
+
+.results_container {
+    padding-top: 1rem;
+}
+
+.results_info {
+	background-color: #e2e2e2;
+	height: 25rem;
+}
+
+.results_title {
+	font-size: 300%;
+	font-weight: bold;
 }

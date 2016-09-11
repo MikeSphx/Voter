@@ -40,13 +40,13 @@
     <div class="container question_container">
       <div id="featured_question_wrapper">
         <img src="resources/img/Q.png">
-        <span id="featured_question"><b>[Insert Question Here]</b></span>
+        <span id="featured_question"><b>Do you like cake or pie?</b></span>
       </div>
       <div id="featured_question_note"><span>Please choose your answer below.</span></div>
 
       <div id="answer_wrapper">
-        <a href="#" class="btn answer_btn" role="button">Yes</a>
-        <a href="#" class="btn answer_btn" role="button">No</a>
+        <a href="#" class="btn answer_btn" role="button" data-id="cake">Cake</a>
+        <a href="#" class="btn answer_btn" role="button" data-id="pie">Pie</a>
       </div>
 
       <hr>
@@ -56,7 +56,23 @@
       </div>
     </div>
 
-    
+    <div class="container results_container" style="display:none">
+      <div id="results_wrapper">
+        <h1 class="results_title">Thank you for voting!</h1>
+        <p id="results_subtitle">Here are the results.</p>
+      </div>
+      <div id="see_results_wrapper" style="display:none;">
+        <h1 class="results_title">Here are the results.</h1><br>
+      </div>
+      <div class="container results_info">
+
+      </div>
+
+      <hr>
+
+    </div>
+
+
 
     <!-- jQuery first, then Tether, then Bootstrap JS. -->
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.0.0/jquery.min.js" integrity="sha384-THPy051/pYDQGanwU6poAc/hOdQxjnOEXzbT+OuUAFqNqFjL+4IGLBgCJC3ZOShY" crossorigin="anonymous"></script>
