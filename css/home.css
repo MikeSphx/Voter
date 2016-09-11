@@ -1,5 +1,5 @@
 #answer_wrapper {
-	width: 72.6%;
+	width: 90%;
     margin: 0 auto;
     margin-top: 3rem;
     margin-bottom: 4rem;
@@ -23,11 +23,18 @@
 }
 
 .answer_btn {
+	font-size: 180%;
     width: 48%;
     margin-left: 1%;
     color: #fff;
     background-color: #03A9F4;
     padding: 4rem 0rem 4rem 0rem;
+    border-radius: 0.5rem;
+}
+
+.answer_btn:hover {
+	color: #fff;
+	opacity: 0.8;
 }
 
 .home_navbar {
