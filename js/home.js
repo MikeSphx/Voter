@@ -3,7 +3,7 @@ $(document).ready(function() {
     // load the question from the db
     loadQuestionText();
     // load the answers from the db
-    loadAnswersText();
+    loadAnswers();
     // give buttons handlers
     setHandlers();
 });
@@ -18,15 +18,16 @@ function loadQuestionText() {
   	});
 }
 
-function loadAnswersText() {
+function loadAnswers() {
 	$.ajax({
   		method: "POST",
   		url: "php/home.php",
-  		data: { func: "getAnswersText", question_id: home_config.question_id }
+  		data: { func: "getAnswers", question_id: home_config.question_id }
 	}).done(function(data) {
-		var answer = JSON.parse(data);
+		var answers = JSON.parse(data);
 		$('a.answer_btn').each(function(index) {
-			$(this).text(answer[index]);
+			$(this).attr('answer_id', answers[index].id);
+			$(this).text(answers[index].text);
 		});
   	});
 }
@@ -51,22 +52,59 @@ function setAnswerButtonsHandler() {
 		$(this).click(function() {
 			$('.question_container').hide();
 			$('.results_container').show();
+			inputVote($(this).attr('answer_id'));
+			generateResults(this);
 		});
 	});
 }
 
-/**
+function inputVote(answerId) {
+	$.ajax({
+  		method: "POST",
+  		url: "php/home.php",
+  		data: { func: "storeVote", question_id: home_config.question_id, answer_id: answerId }
+	}).done(function() {
+		console.log('vote input successful');
+  	});
+}
 
-How to store the data
+function generateResults(answerBtn) {
+	var vote = $(answerBtn).text();
+	var title = document.createElement('h2');
+	title.innerHTML = "You voted for: " + vote;
+	$('.results_info').append(title);
+	var stats = document.createElement('h4');
+	stats.innerHTML = loadStats();
+	$('.results_info').append(stats);
+}
 
-Question : ID | Question_Text | Answers
-           number | string | array of strings
-Answer   : ID | Data
-           number | string
+function loadStats() {
+	var statsText = "Here's what everyone else thought: ";
+	$.ajax({
+		async: false,
+  		method: "POST",
+  		url: "php/home.php",
+  		data: { func: "getAnswers", question_id: home_config.question_id }
+	}).done(function(data) {
+		var answers = JSON.parse(data);
+		$.each(answers, function(index, answer) {
+			statsText = statsText + answer.text + "|" + loadNumVotesOfAnswer(answer.id).toString() + " ";
+		});
+  	});
+  	statsText = statsText;
+	return statsText;
+}
 
-How to show the results using Chart.js
-
-Pass in the Question's Answers array
-Count all answers with each Data, form an array
-
-**/
+function loadNumVotesOfAnswer(answerId) {
+	var numOfVotes = 0;
+	$.ajax({
+		async: false,
+		method: "POST",
+  		url: "php/home.php",
+  		data: { func: "getVotes", question_id: home_config.question_id, answer_id: answerId }
+	}).done(function(data) {
+		var votes = JSON.parse(data);
+		numOfVotes = votes.length;
+  	});
+	return numOfVotes.toString();
+}
