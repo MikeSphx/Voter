@@ -42,8 +42,15 @@
 	}
 
 	//retrieves the question's answers from the provided question_id
-	function getAnswerText() {
-
+	function getAnswersText() {
+		global $conn;
+		$question_id = $_POST['question_id'];
+		$result = mysqli_query($conn,"SELECT text FROM voter.question_answer JOIN voter.answer ON voter.question_answer.answer_id=voter.answer.id WHERE question_id = $question_id");
+		$resultData = array();
+		while($row = mysqli_fetch_assoc($result)) {
+			$resultData[] = $row['text'];
+		}
+		echo json_encode($resultData);
 	}
 
 	mysqli_close($conn);

@@ -3,18 +3,31 @@ $(document).ready(function() {
     // load the question from the db
     loadQuestionText();
     // load the answers from the db
+    loadAnswersText();
     // give buttons handlers
     setHandlers();
 });
 
 function loadQuestionText() {
 	$.ajax({
-		async: false,
   		method: "POST",
   		url: "php/home.php",
   		data: { func: "getQuestionText", question_id: home_config.question_id }
 	}).done(function(msg) {
 		$('#featured_question b').text(msg);
+  	});
+}
+
+function loadAnswersText() {
+	$.ajax({
+  		method: "POST",
+  		url: "php/home.php",
+  		data: { func: "getAnswersText", question_id: home_config.question_id }
+	}).done(function(data) {
+		var answer = JSON.parse(data);
+		$('a.answer_btn').each(function(index) {
+			$(this).text(answer[index]);
+		});
   	});
 }
 
