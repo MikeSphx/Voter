@@ -12,7 +12,7 @@ function loadQuestionText() {
 		async: false,
   		method: "POST",
   		url: "php/home.php",
-  		data: { func: "getQuestionText", question_id: 1 }
+  		data: { func: "getQuestionText", question_id: home_config.question_id }
 	}).done(function(msg) {
 		$('#featured_question b').text(msg);
   	});
