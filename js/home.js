@@ -1,10 +1,22 @@
 // A $( document ).ready() block.
 $(document).ready(function() {
     // load the question from the db
+    loadQuestionText();
     // load the answers from the db
     // give buttons handlers
     setHandlers();
 });
+
+function loadQuestionText() {
+	$.ajax({
+		async: false,
+  		method: "POST",
+  		url: "php/home.php",
+  		data: { func: "getQuestionText", question_id: 1 }
+	}).done(function(msg) {
+		$('#featured_question b').text(msg);
+  	});
+}
 
 function setHandlers() {
 	setSeeResultsHandler();
