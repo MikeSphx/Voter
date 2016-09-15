@@ -1,3 +1,3 @@
 var home_config = {
-  question_id: 2
+  question_id: 1
 }
