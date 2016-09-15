@@ -54,6 +54,7 @@ function setAnswerButtonsHandler() {
 			$('.results_container').show();
 			inputVote($(this).attr('answer_id'));
 			generateResults(this);
+			generateChart();
 		});
 	});
 }
@@ -70,12 +71,74 @@ function inputVote(answerId) {
 
 function generateResults(answerBtn) {
 	var vote = $(answerBtn).text();
-	var title = document.createElement('h2');
-	title.innerHTML = "You voted for: " + vote;
-	$('.results_info').append(title);
-	var stats = document.createElement('h4');
-	stats.innerHTML = loadStats();
-	$('.results_info').append(stats);
+	$('.results_info_title').text("You voted for: " + vote);
+	$('.results_info_subtitle').text(loadStats());
+}
+
+function generateChart() {
+	var chart = document.getElementById('results_chart_pie');
+
+	var chartLabels = loadChartInfo('label');
+	var chartData = loadChartInfo('data');
+
+	var myChart = new Chart(chart, {
+	    type: 'pie',
+	    data: {
+	        labels: chartLabels, //["Red", "Blue", "Yellow", "Green", "Purple", "Orange"],
+	        datasets: [{
+	            label: '# of Votes',
+	            data: chartData, //[12, 19, 3, 5, 2, 3],
+	            backgroundColor: [
+	                'rgba(255, 99, 132, 0.2)',
+	                'rgba(54, 162, 235, 0.2)'
+	                /*'rgba(255, 206, 86, 0.2)',
+	                'rgba(75, 192, 192, 0.2)',
+	                'rgba(153, 102, 255, 0.2)',
+	                'rgba(255, 159, 64, 0.2)'*/
+	            ],
+	            borderColor: [
+	                'rgba(255,99,132,1)',
+	                'rgba(54, 162, 235, 1)'
+	                /*'rgba(255, 206, 86, 1)',
+	                'rgba(75, 192, 192, 1)',
+	                'rgba(153, 102, 255, 1)',
+	                'rgba(255, 159, 64, 1)'*/
+	            ],
+	            borderWidth: 1
+	        }]
+	    },
+	    options: {
+	        scales: {
+	            yAxes: [{
+	                ticks: {
+	                    beginAtZero:true
+	                }
+	            }]
+	        }
+	    }
+	});
+}
+
+function loadChartInfo(state) {
+	var result = [];
+	$.ajax({
+		async: false,
+  		method: "POST",
+  		url: "php/home.php",
+  		data: { func: "getAnswers", question_id: home_config.question_id }
+	}).done(function(data) {
+		var answers = JSON.parse(data);
+		$.each(answers, function(index, answer) {
+			if (state === 'data') {
+				result.push(parseInt(loadNumVotesOfAnswer(answer.id)));
+			} else if (state === 'label') {
+				result.push(answer.text);
+				//console.log(answer.text);
+			}
+		});
+	});
+	result = result;
+	return result; 
 }
 
 function loadStats() {

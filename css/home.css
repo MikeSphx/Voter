@@ -66,6 +66,10 @@
 	font-size: 350%;
 }
 
+.results_chart_wrapper {
+	width: 25%;
+}
+
 .results_container {
     padding-top: 1rem;
 }
